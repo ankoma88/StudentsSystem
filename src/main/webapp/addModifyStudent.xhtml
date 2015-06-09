@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/main.xhtml">
+    <ui:define name="content">
+
+        <div class="container">
+            <div class="col-md-8 col-md-offset-2">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3>Add or Modify student</h3></div>
+                    <div class="panel-body">
+                        <h:form>
+                            <table class="table table-striped table-hover active">
+
+                                <tr>
+                                    <td><h:outputLabel style="font-size: 18px" value="Last name"/><br/>
+                                        <h:inputText value="#{showStudentsBean.newStudent.lName}" required="true" id="lName" class="form-control" requiredMessage="Please, enter student's last name">
+                                            <f:passThroughAttribute name="placeholder" value="#{studentToMod.lName}"/>
+                                        </h:inputText>
+                                        <h:message for="lName" styleClass="errorMessage"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><h:outputLabel style="font-size: 18px" value="First name"/><br/>
+                                        <h:inputText value="#{showStudentsBean.newStudent.fName}" required="true" id="fName" class="form-control" requiredMessage="Please, enter student's first name">
+                                            <f:passThroughAttribute name="placeholder" value="#{studentToMod.fName}"/>
+                                        </h:inputText>
+                                        <h:message for="fName" styleClass="errorMessage"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><h:outputLabel style="font-size: 18px" value="Student group"/><br/>
+                                        <h:inputText value="#{showStudentsBean.newStudent.studGroup}" required="true" id="studGroup" class="form-control" requiredMessage="Please, enter student's group">
+                                            <f:passThroughAttribute name="placeholder" value="#{studentToMod.studGroup}"/>
+                                        </h:inputText>
+                                        <h:message for="studGroup" styleClass="errorMessage"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p:outputLabel value="Start date" for="startDate"/>
+                                        <p:calendar id="startDate" value="#{showStudentsBean.newStudent.startDate}" pattern="dd.MM.yyyy"/>
+                                    </td>
+                                </tr>
+
+                            </table>
+                            <div align="center"><h:commandButton class="btn btn-primary" rendered="#{showStudentsBean.check() eq 'add'}" value="Add student" action="#{showStudentsBean.addNewStudent()}"/></div>
+                            <div align="center"><h:commandButton class="btn btn-primary" rendered="#{showStudentsBean.check() eq 'mod'}" value="Modify student" action="#{showStudentsBean.modifyStudent()}"/></div>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </ui:define>
+</ui:composition>
+
+</html>

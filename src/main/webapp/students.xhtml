@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/main.xhtml">
+    <ui:define name="content">
+
+        <h2 style="padding-left: 20px">Students</h2>
+        <br/>
+
+        <h:form>
+            <table class="table">
+                <tr>
+                    <td>
+                        <h:commandLink value="Create random progress (marks)"  action="#{showProgressBean.createRandomProgress()}" class="btn btn-default" style="width: 300px"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h:commandLink value="Show progress of selected student"  action="#{showStudentsBean.toProgress()}" class="btn btn-default" style="width: 300px"/>
+                    </td>
+                </tr>
+            <tr>
+            <td>
+                <h:commandLink value="Add new student" action="#{showStudentsBean.toAddStudent()}" class="btn btn-default" style="width: 300px"  rendered="#{loginBean.currentUser.isAdmin}">
+                </h:commandLink>
+            </td>
+            <td>
+                <h:commandLink  value="Modify selected student" action="#{showStudentsBean.toModStudent()}" class="btn btn-default" style="width: 300px"  rendered="#{loginBean.currentUser.isAdmin}">
+                </h:commandLink >
+
+            </td>
+            <td>
+                <h:commandLink value="Delete selected students" action="#{showStudentsBean.deleteStudents()}" rendered="#{loginBean.currentUser.isAdmin}" class="btn btn-default" style="width: 300px" />
+            </td>
+            </tr>
+             </table>
+                <p:dataTable var="stud" value="#{showStudentsBean.students}" >
+                    <p:column width="5%"> <!-- In task's prototype this column should be seen to admin only, but in this case it would be impossible to chose student and see marks for regular user. Therefore, I leave it accessable for both user roles-->
+                        <h:selectBooleanCheckbox value="#{stud.isSelected}" />
+                    </p:column>
+                    <p:column headerText="Last name">
+                        <h:outputText value="#{stud.lName}"/>
+                    </p:column>
+                    <p:column headerText="First name">
+                        <h:outputText value="#{stud.fName}"/>
+                    </p:column>
+                    <p:column headerText="Student group">
+                        <h:outputText value="#{stud.studGroup}"/>
+                    </p:column>
+                    <p:column headerText="Start date">
+                        <h:outputText value="#{stud.retrieveFormDate()}"/>
+                    </p:column>
+                </p:dataTable>
+        </h:form>
+
+
+    </ui:define>
+</ui:composition>
+
+</html>

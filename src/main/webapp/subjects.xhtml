@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/templates/main.xhtml">
+    <ui:define name="content">
+
+        <h2 style="padding-left: 20px">Subjects</h2>
+        <br/>
+
+        <h:form>
+            <table class="table">
+                <tr>
+                    <td>
+                        <h:commandLink value="Add new subject" action="#{showSubjectsBean.toAddSubject()}" class="btn btn-default" style="width: 300px"  rendered="#{loginBean.currentUser.isAdmin}">
+                        </h:commandLink>
+                    </td>
+                    <td>
+                        <h:commandLink  value="Modify selected subject" action="#{showSubjectsBean.toModSubject()}" class="btn btn-default" style="width: 300px"  rendered="#{loginBean.currentUser.isAdmin}">
+                        </h:commandLink>
+                    </td>
+                    <td>
+                        <h:commandLink value="Delete selected subjects" action="#{showSubjectsBean.deleteSubjects()}" rendered="#{loginBean.currentUser.isAdmin}" class="btn btn-default" style="width: 300px" />
+                    </td>
+                </tr>
+            </table>
+            <p:dataTable var="subj" value="#{showSubjectsBean.subjects}" >
+                <p:column rendered="#{loginBean.currentUser.isAdmin}" width="5%">
+                    <h:selectBooleanCheckbox value="#{subj.isSelected}" />
+                </p:column>
+                <p:column headerText="Subject">
+                    <h:outputText value="#{subj.subjectName}"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+
+    </ui:define>
+</ui:composition>
+
+</html>

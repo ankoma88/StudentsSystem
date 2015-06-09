@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/templates/main.xhtml">
+    <ui:define name="content">
+
+        <h2>Students and Study Progress Management System</h2>
+        <br/>
+
+        <table class="table">
+            <tr>
+                <td>
+                    <h:link value="Students" outcome="students" class="btn btn-default" style="width: 300px"/>
+                </td>
+                <td>
+                    <h:link value="Subjects" outcome="subjects" class="btn btn-default" style="width: 300px"/>
+                </td>
+                <td>
+                    <h:link value="Terms" outcome="terms" class="btn btn-default" style="width: 300px"/>
+                </td>
+            </tr>
+        </table>
+
+
+    </ui:define>
+</ui:composition>
+
+</html>

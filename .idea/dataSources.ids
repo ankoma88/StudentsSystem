@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="studentsDB" uuid="2527c118-6fab-4cf4-a808-910211ba6dba">
+    <database-info product="MySQL" version="5.5.43-0ubuntu0.14.04.1" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.34 ( Revision: jess.balint@oracle.com-20141014163213-wqbwpf1ok2kvo1om )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
+    <schema name="" catalog="studentsDB"/>
+    <table name="APP_USER" schema="" catalog="studentsDB" type="TABLE">
+      <column name="USER_ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="ISADMIN" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6" def="MA=="/>
+      <column name="LOGIN_NAME" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="PASSWORD" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="USER_ID"/>
+    </table>
+    <table name="PROGRESS" schema="" catalog="studentsDB" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="MARK" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="STUDENT_ID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="SUBJECT_ID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+      <foreign-key name="FK_PROGRESS_STUDENT_ID" columns="STUDENT_ID" ref-table="STUDENT" ref-schema="" ref-catalog="studentsDB" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_PROGRESS_SUBJECT_ID" columns="SUBJECT_ID" ref-table="SUBJECT" ref-schema="" ref-catalog="studentsDB" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_PROGRESS_STUDENT_ID" unique="false" columns="STUDENT_ID"/>
+      <index name="FK_PROGRESS_SUBJECT_ID" unique="false" columns="SUBJECT_ID"/>
+    </table>
+    <table name="STUDENT" schema="" catalog="studentsDB" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="FNAME" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="LNAME" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="STARTDATE" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="STUDGROUP" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+      <exported-key name="FK_PROGRESS_STUDENT_ID" table="PROGRESS" schema="" catalog="studentsDB" columns="STUDENT_ID"/>
+    </table>
+    <table name="SUBJECT" schema="" catalog="studentsDB" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="SUBJECTNAME" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="TERM_ID" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+      <foreign-key name="FK_SUBJECT_TERM_ID" columns="TERM_ID" ref-table="TERM" ref-schema="" ref-catalog="studentsDB" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_PROGRESS_SUBJECT_ID" table="PROGRESS" schema="" catalog="studentsDB" columns="SUBJECT_ID"/>
+      <index name="FK_SUBJECT_TERM_ID" unique="false" columns="TERM_ID"/>
+    </table>
+    <table name="TERM" schema="" catalog="studentsDB" type="TABLE">
+      <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="DURATION" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="ID"/>
+      <exported-key name="FK_SUBJECT_TERM_ID" table="SUBJECT" schema="" catalog="studentsDB" columns="TERM_ID"/>
+    </table>
+  </data-source>
+</component>

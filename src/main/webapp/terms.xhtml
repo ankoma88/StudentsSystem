@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/templates/main.xhtml">
+    <ui:define name="content">
+
+        <h2 style="padding-left: 20px">Terms</h2>
+        <br/>
+
+        <h:form>
+            <table class="table">
+                <tr>
+                        <td><h:outputText id="informationMessage"
+                                          value="#{showTermsBean.infoMessage}"
+                                          rendered="#{showTermsBean.infoMessage ne null}"
+                                          class="errorMessage" style="font-size: 18px">
+                        </h:outputText></td>
+                    <td>
+                        <h:commandLink value="Add new term" action="#{showTermsBean.toAddTerm()}"
+                                       class="btn btn-default" style="width: 300px"  rendered="#{loginBean.currentUser.isAdmin}">
+                        </h:commandLink>
+                    </td>
+                    <td>
+                        <h:commandLink  value="Modify selected term" action="#{showTermsBean.toModTerm()}"
+                                        class="btn btn-default" style="width: 300px"  rendered="#{loginBean.currentUser.isAdmin}">
+                        </h:commandLink>
+                    </td>
+                    <td>
+                        <h:commandLink value="Delete selected term" action="#{showTermsBean.deleteTerm()}"
+                                       rendered="#{loginBean.currentUser.isAdmin}" class="btn btn-default" style="width: 300px" />
+                    </td>
+                </tr>
+            </table>
+        </h:form>
+        <h:form>
+        <table class="table">
+                <tr>
+                    <td>
+                        <h:form>
+                            <tr>
+                                <td>
+                                    <h:outputText value="Select academic term:"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                            <p:selectOneMenu value="#{showTermsBean.modTermId}">
+                                <f:selectItems value="#{showTermsBean.terms}" />
+                            </p:selectOneMenu>
+                                </td>
+                             </tr>
+                            <tr>
+                                <td>
+                            <p:commandButton value="Select term" action="#{showTermsBean.selectTerm()}" />
+                                </td>
+                            </tr>
+                        </h:form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h:outputText value="Selected term:" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h:outputText value="#{showTermsBean.modTerm}"
+                                      rendered="#{showTermsBean.modTerm ne null}" style="font-size: larger"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h:outputText value="Duration in weeks:" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h:outputText value="#{showTermsBean.modTerm.duration} "
+                                      rendered="#{showTermsBean.modTerm ne null}" style="font-size: larger"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p:dataTable var="termSubject" value="#{showTermsBean.termSubjects}" >
+                            <p:column headerText="Term's subjects">
+                                <h:outputText value="#{termSubject.subjectName}"/>
+                            </p:column>
+                        </p:dataTable>
+                </td>
+                </tr>
+
+            </table>
+        </h:form>
+
+
+
+
+
+    </ui:define>
+</ui:composition>
+
+</html>

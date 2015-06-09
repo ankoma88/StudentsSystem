@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/templates/main.xhtml">
+    <ui:define name="content">
+
+        <h2 style="padding-left: 20px">Progress of Student</h2>
+        <br/>
+
+        <h:form>
+            <h:outputText value="Marks of the student:"/>
+
+            <p:dataTable  value="#{showProgressBean.selStudent}">
+                <p:column headerText="Last name">
+                    <h:outputText value="#{showProgressBean.selStudent.lName}"/>
+                </p:column>
+                <p:column headerText="First name">
+                    <h:outputText value="#{showProgressBean.selStudent.fName}"/>
+                </p:column>
+                <p:column headerText="Student group">
+                    <h:outputText value="#{showProgressBean.selStudent.studGroup}"/>
+                </p:column>
+                <p:column headerText="Start date">
+                    <h:outputText value="#{showProgressBean.formatDate(showProgressBean.selStudent.startDate)}"/>
+                </p:column>
+            </p:dataTable>
+
+        </h:form>
+
+        <h:form>
+            <table class="table">
+                <tr>
+                    <td>
+                        <h:outputText value="Select academic term:"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p:selectOneMenu value="#{showProgressBean.modTermId}">
+                            <f:selectItems value="#{showProgressBean.terms}"/>
+                        </p:selectOneMenu>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p:commandButton value="Select term" action="#{showProgressBean.selectTerm()}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h:outputText value="Selected term: "/>
+                        <h:outputText value="#{showTermsBean.modTerm}" style="font-size: larger"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h:outputText value="Average score for selected term: "/>
+                        <h:outputText value="#{showProgressBean.averageScore}"/>
+                    </td>
+                </tr>
+            </table>
+        </h:form>
+
+        <h:form>
+            <p:dataTable value="#{showProgressBean.subjects}" var="subjectEntry">
+                <p:column headerText="Subject">
+                    <h:outputText value="#{subjectEntry.key.subjectName}"/>
+                </p:column>
+                <p:column headerText="Mark">
+                    <h:outputText value="#{subjectEntry.value}"/>
+                </p:column>
+            </p:dataTable> <br/>
+        </h:form>
+
+
+    </ui:define>
+</ui:composition>
+
+</html>
